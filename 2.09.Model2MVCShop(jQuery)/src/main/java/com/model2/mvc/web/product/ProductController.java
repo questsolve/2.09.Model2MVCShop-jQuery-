@@ -42,13 +42,13 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value="addProduct", method=RequestMethod.POST)
-	public String addProduct(@ModelAttribute("product") Product product ,@RequestParam("filelName")MultipartFile uploadFile) throws Exception{
+	public String addProduct(@ModelAttribute("product") Product product ,@RequestParam("fileSource")MultipartFile uploadFile) throws Exception{
 		System.out.println("/addProduct.do");
 		
 		if(uploadFile != null) {
 			String fileName = uploadFile.getOriginalFilename();
 			product.setFileName(fileName);
-			File file = new File("C:\\workspace\\2.07.Model2MVCShop(URI,pattern)\\WebContent\\images\\uploadFiles\\"+ fileName);
+			File file = new File("C:\\workspace\\2.09.Model2MVCShop(URI,pattern)\\WebContent\\images\\uploadFiles\\"+ fileName);
 			uploadFile.transferTo(file);
 		}
 		
