@@ -48,7 +48,7 @@ public class ProductController {
 		if(uploadFile != null) {
 			String fileName = uploadFile.getOriginalFilename();
 			product.setFileName(fileName);
-			File file = new File("C:\\workspace\\2.09.Model2MVCShop(URI,pattern)\\WebContent\\images\\uploadFiles\\"+ fileName);
+			File file = new File("C:\\Users\\bitcamp\\git\\2.09.Model2MVCShop\\2.09.Model2MVCShop(jQuery)\\WebContent\\images\\uploadFiles\\"+ fileName);
 			uploadFile.transferTo(file);
 		}
 		
