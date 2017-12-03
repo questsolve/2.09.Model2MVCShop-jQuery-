@@ -34,18 +34,26 @@ function fncGetUserList(currentPage) {
 }
 $(function(){
 	$(".ct_list_pop td:nth-child(1)").on("click",function(){
+		
 		self.location ="../purchase/getPurchase?tranNo="+$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val()+"&menu=${menu}";
+		alert($($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val());
 	});
 	
 	$(".ct_list_pop td:nth-child(9):contains('배송처리')").on("click",function(){
-		self.location="../purchase/updateTranCode?tranNo=${purchase.tranNo}";
+		self.location="../purchase/updateTranCode?tranNo="+$("input[name=tranNo]").val();
 		
 	});
 	
 	$(".ct_list_pop td:nth-child(9):contains('구매완료')").on("click",function(){
-		self.location="../purchase/updateTranCode?tranNo=${purchase.tranNo}";
+		self.location="../purchase/updateTranCode?tranNo="+$("input[name=tranNo]").val();
+		//$($("input")[0]).val()도 10037
+		//$("input[name=tranNo]").val()로 찍으면 10037 고정
+		//$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val()는 인식 못함
+		// ㄴ 예상에는 this에 문제가 있는듯 함
+		
 		
 	});
+	
 });
 </script>
 </head>
@@ -72,7 +80,7 @@ $(function(){
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0"	style="margin-top: 10px;">
 	<tr>
-		<td colspan="11">전체 ${resultPage.totalCount } 건수, 현재  ${resultPage.currentPage } 페이지</td>
+		<td colspan="11">전체 ${resultPage.totalCount} 건수, 현재  ${resultPage.currentPage} 페이지</td>
 	</tr>
 	<tr>
 		<td class="ct_list_b" width="100">No</td>
@@ -89,21 +97,6 @@ $(function(){
 	</tr>
 	
 
-	<%--<%
-	String transtatus = "";
-	for(int i =0; i< list.size();++i){
-		
-		Purchase purchase = (Purchase)list.get(i);
-		if(purchase.getTranCode().contains("0")){
-			transtatus = "배송 준비 중";
-		}else if(purchase.getTranCode().contains("1")){
-			transtatus = "배송 중";
-		}else{
-			transtatus = "배송 완료";
-		}
-		%>
-	<%} %>
-	--%>
 	<c:set var = "i" value="0" />
 	<c:forEach var = "purchase" items="${purchaseMapList}">
 	<c:set var="i" value="${i+1}"> </c:set>
@@ -145,12 +138,10 @@ $(function(){
 				 
 				 
 				 <c:if test="${!(purchase.buyer.role == 'user')}">
-				 	<!-- <a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">배송처리</a> -->
 				 	배송처리	
 				 </c:if>
 				 <c:if test="${purchase.buyer.role == 'user' && purchase.tranCode.trim() == '1' }">
-				 <!--	<a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">구매완료</a>-->
-				 구매완료	
+					 구매완료	
 				 </c:if>				
 			
 				 </td>
@@ -170,22 +161,7 @@ $(function(){
 	<tr>
 		<td align="center">
 		<input type="hidden" id="currentPage" name="currentPage" value=""/>
-		<%--<% if( resultPage.getCurrentPage() <= resultPage.getPageUnit() ){ %>
-					◀ 이전
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getCurrentPage()-1%>')">◀ 이전</a>
-			<% } %>
-
-			<%	for(int i=resultPage.getBeginUnitPage();i<= resultPage.getEndUnitPage() ;i++){	%>
-					<a href="javascript:fncGetProductList('<%=i %>');"><%=i %></a>
-			<% 	}  %>
-	
-			<% if( resultPage.getEndUnitPage() >= resultPage.getMaxPage() ){ %>
-					이후 ▶
-			<% }else{ %>
-					<a href="javascript:fncGetProductList('<%=resultPage.getEndUnitPage()+1%>')">이후 ▶</a>
-			<% } %>  --%>
-			<jsp:include page="../common/pageNavigator.jsp"/>
+		<jsp:include page="../common/pageNavigator.jsp"/>
 			
 		</td>
 	</tr>
