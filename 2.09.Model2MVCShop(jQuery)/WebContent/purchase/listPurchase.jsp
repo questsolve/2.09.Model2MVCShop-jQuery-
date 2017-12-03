@@ -30,11 +30,21 @@
 
 function fncGetUserList(currentPage) {
 	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
+	$("form").attr("method","POST").attr("action","../purchase/listPurchase").submit();
 }
 $(function(){
 	$(".ct_list_pop td:nth-child(1)").on("click",function(){
 		self.location ="../purchase/getPurchase?tranNo="+$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val()+"&menu=${menu}";
+	});
+	
+	$(".ct_list_pop td:nth-child(9):contains('배송처리')").on("click",function(){
+		self.location="../purchase/updateTranCode?tranNo=${purchase.tranNo}";
+		
+	});
+	
+	$(".ct_list_pop td:nth-child(9):contains('구매완료')").on("click",function(){
+		self.location="../purchase/updateTranCode?tranNo=${purchase.tranNo}";
+		
 	});
 });
 </script>
@@ -44,7 +54,7 @@ $(function(){
 
 <div style="width: 98%; margin-left: 10px;">
 
-<form name="detailForm" action="../purchase/listPurchase" method="post">
+<form name="detailForm">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -120,7 +130,7 @@ $(function(){
 		</td>
 		<td></td>
 		<td align="left">
-			<a href="../user/getUser?userId=${purchase.buyer.userId}">${purchase.buyer.userId}</a>
+			${purchase.buyer.userId}
 		</td>
 		<td></td>
 		<td align="left">${purchase.buyer.userName }</td>
@@ -132,11 +142,15 @@ $(function(){
 					${transtatus }
 				
 				 입니다.
+				 
+				 
 				 <c:if test="${!(purchase.buyer.role == 'user')}">
-				 	<a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">배송처리</a>	
+				 	<!-- <a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">배송처리</a> -->
+				 	배송처리	
 				 </c:if>
 				 <c:if test="${purchase.buyer.role == 'user' && purchase.tranCode.trim() == '1' }">
-				 	<a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">구매완료</a>	
+				 <!--	<a href="../purchase/updateTranCode?tranNo=${purchase.tranNo }">구매완료</a>-->
+				 구매완료	
 				 </c:if>				
 			
 				 </td>
