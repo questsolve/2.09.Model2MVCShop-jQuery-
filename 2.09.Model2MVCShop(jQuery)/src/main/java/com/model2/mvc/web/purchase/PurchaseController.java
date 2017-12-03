@@ -88,7 +88,7 @@ public class PurchaseController {
 		System.out.println("/addPurchase");
 		Product product = productService.getProduct(prodNo);
 		User user = userService.getUser(buyerId);
-		
+		System.out.println("");
 		purchase.setBuyer(user);
 		purchase.setPurchaseProd(product);
 		purchase.setDivyAddr(request.getParameter("receiverAddr"));
@@ -136,7 +136,8 @@ public class PurchaseController {
 		System.out.println("/getPurchase");
 		System.out.println(tranNo+" 번 거래목록");
 		Purchase purchase = purchaseService.getPurchase(tranNo);
-		System.out.println(purchase);
+		Product product = productService.getProduct(purchase.getPurchaseProd().getProdNo());
+		purchase.setPurchaseProd(product);
 		map.put("purchase", purchase);
 		ModelAndView mV = new ModelAndView("forward:/purchase/getPurchase.jsp",map);
 		

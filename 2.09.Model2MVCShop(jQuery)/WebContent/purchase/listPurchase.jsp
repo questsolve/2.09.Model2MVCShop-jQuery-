@@ -25,13 +25,18 @@
 <title>구매 목록조회</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
 function fncGetUserList(currentPage) {
 	document.getElementById("currentPage").value = currentPage;
 	document.detailForm.submit();
 }
+$(function(){
+	$(".ct_list_pop td:nth-child(1)").on("click",function(){
+		self.location ="../purchase/getPurchase?tranNo="+$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val()+"&menu=${menu}";
+	});
+});
 </script>
 </head>
 
@@ -109,7 +114,9 @@ function fncGetUserList(currentPage) {
 	</tr>
 	<tr class="ct_list_pop">
 		<td align="center">
-			<a href="../purchase/getPurchase?tranNo=${purchase.tranNo}">${i}</a>
+			<!-- <a href="../purchase/getPurchase?tranNo=${purchase.tranNo}">${i}</a> -->
+			${i}
+			<input type="hidden" name="tranNo" value="${purchase.tranNo}"/>
 		</td>
 		<td></td>
 		<td align="left">
