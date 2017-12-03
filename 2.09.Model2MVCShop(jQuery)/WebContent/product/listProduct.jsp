@@ -34,9 +34,8 @@ function fncGetUserList(currentPage){
 }
 
 $(function(){
-	$("tr.ct_list_pop:contains('${product.prodName}')").on("click",function(){
-		console.log();
-		self.location ="../product/getProduct?prodNo=${product.prodNo}&menu=${menu}";
+	$(".ct_list_pop td:nth-child(3)").on("click",function(){
+		self.location ="../product/getProduct?prodNo="+$($("input[name=prodNo]")[$(".ct_list_pop td:nth-child(3)").index(this)]).val()+"&menu=${menu}";
 	});
 	
 });
@@ -141,6 +140,7 @@ $(function(){
 		<td align="left">
 		<!-- <a href="../product/getProduct?prodNo=${product.prodNo}&menu=${menu}">${product.prodName}</a> -->
 		${product.prodName}
+		<input type="hidden" name="prodNo" value="${product.prodNo}"/>
 		</td>
 				
 		<td></td>

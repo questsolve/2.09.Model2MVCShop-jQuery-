@@ -65,7 +65,7 @@ public class ProductController {
 		return "forward:/product/addProductView.jsp";
 	}
 	
-	@RequestMapping(value="getProduct", method=RequestMethod.GET)
+	@RequestMapping(value="getProduct")
 	public String getProduct(@RequestParam("prodNo") int prodNo,@RequestParam("menu") String menu, Map map, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		System.out.println("/getProduct.do");
 		Product product = productService.getProduct(prodNo);
@@ -102,7 +102,7 @@ public class ProductController {
 		
 		return "forward:/product/updateProduct.jsp";
 	}
-	@RequestMapping(value="/updateProduct",method=RequestMethod.GET)
+	@RequestMapping(value="updateProduct",method=RequestMethod.GET)
 	public String updateProductView(@RequestParam("prodNo") int prodNo) throws Exception{
 		productService.getProduct(prodNo);
 		return "forward:/product/updateProductView.jsp";

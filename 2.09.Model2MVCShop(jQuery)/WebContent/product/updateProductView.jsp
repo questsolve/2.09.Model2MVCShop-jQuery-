@@ -15,13 +15,13 @@
 <title>회원정보수정</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 
-<script type="text/javascript" src="../javascript/calendar.js">
-</script>
+<script type="text/javascript" src="../javascript/calendar.js"></script>
 
 <script type="text/javascript">
 
-<!--
+
 function fncAddProduct(){
 	//Form 유효성 검증
  	var name = document.detailForm.prodName.value;
@@ -46,10 +46,21 @@ function fncAddProduct(){
 		return;
 	}
 		
-	document.detailForm.action='/updateProduct.do';
+	document.detailForm.action='../product/updateProduct';
 	document.detailForm.submit();
 }
--->
+
+$(function() {
+	$("td.ct_btn01:contains('수정')").on("click", function() {
+		fncAddProduct();
+	});
+
+	$("td.ct_btn01:contains('취소')").on("click", function() {
+		history.go(-1);
+	});
+});
+
+
 </script>
 </head>
 
@@ -165,7 +176,8 @@ function fncAddProduct(){
 						<img src="/images/ct_btnbg01.gif" width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01"	style="padding-top: 3px;">
-						<a href="javascript:fncAddProduct();">수정</a>
+						<!-- <a href="javascript:fncAddProduct();">수정</a> -->
+						수정
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
@@ -175,7 +187,8 @@ function fncAddProduct(){
 						<img src="/images/ct_btnbg01.gif"width="17" height="23"/>
 					</td>
 					<td background="/images/ct_btnbg02.gif" class="ct_btn01" style="padding-top: 3px;">
-						<a href="javascript:history.go(-1)">취소</a>
+						<!--<a href="javascript:history.go(-1)">취소</a>-->
+						취소
 					</td>
 					<td width="14" height="23">
 						<img src="/images/ct_btnbg03.gif" width="14" height="23"/>
