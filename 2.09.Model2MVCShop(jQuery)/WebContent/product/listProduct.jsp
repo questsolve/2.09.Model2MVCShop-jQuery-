@@ -25,14 +25,21 @@
 <title>상품 목록조회</title>
 
 <link rel="stylesheet" href="/css/admin.css" type="text/css">
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script type="text/javascript">
 
 function fncGetUserList(currentPage){
 	document.getElementById("currentPage").value = currentPage;
-	document.detailForm.submit();
+	$("form").attr("action","../product/listProduct?menu=${menu}").attr("method","post").submit();
 }
 
+$(function(){
+	$("tr.ct_list_pop:contains('${product.prodName}')").on("click",function(){
+		console.log();
+		self.location ="../product/getProduct?prodNo=${product.prodNo}&menu=${menu}";
+	});
+	
+});
 </script>
 </head>
 
@@ -40,7 +47,7 @@ function fncGetUserList(currentPage){
 
 <div style="width:98%; margin-left:10px;">
 
-<form name="detailForm" action="../product/listProduct?menu=${menu}" method="post">
+<form name="detailForm">
 
 <table width="100%" height="37" border="0" cellpadding="0"	cellspacing="0">
 	<tr>
@@ -132,7 +139,8 @@ function fncGetUserList(currentPage){
 		<td></td>
 				
 		<td align="left">
-		<a href="../product/getProduct?prodNo=${product.prodNo}&menu=${menu}">${product.prodName}</a>
+		<!-- <a href="../product/getProduct?prodNo=${product.prodNo}&menu=${menu}">${product.prodName}</a> -->
+		${product.prodName}
 		</td>
 				
 		<td></td>
@@ -182,5 +190,7 @@ function fncGetUserList(currentPage){
 </form>
 
 </div>
+
+
 </body>
 </html>
