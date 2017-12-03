@@ -25,7 +25,7 @@
 		 	$( "td[width='115']:contains('login')" ).on("click" , function() {
 				//Debug..
 				//alert(  $( "td[width='115']:contains('login')" ).html() );
-				$(window.parent.frames["rightFrame"].document.location).attr("href","/user/login");
+				$(window.parent.frames["rightFrame"].document.location).attr("href","../user/login");
 			});
 			
 			
