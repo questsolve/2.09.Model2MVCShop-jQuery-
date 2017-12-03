@@ -59,13 +59,13 @@ function resetData(){
 $(function() {
 	$("td.ct_btn01:contains('등록')").on("click", function() {
 		fncAddProduct();
-	})
+	});
 });
 
 $(function() {
 	$("td.ct_btn01:contains('취소')").on("click", function() {
 		resetData();
-	})
+	});
 });
 
 
