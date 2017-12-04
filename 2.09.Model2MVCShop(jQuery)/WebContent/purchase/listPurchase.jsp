@@ -43,20 +43,14 @@ $(function(){
 	});
 	
 	$(".ct_list_pop td:nth-child(9):contains('배송처리')").on("click",function(){
-		self.location="../purchase/updateTranCode?tranNo="+$("input[name=tranNo]").val();
+		self.location="../purchase/updateTranCode?tranNo="+$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(9)").index(this)]).val();
 		
 	});
 	
 	$(".ct_list_pop td:nth-child(9):contains('구매완료')").on("click",function(){
 		
 		self.location="../purchase/updateTranCode?tranNo="+$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(9)").index(this)]).val();
-		
-		//$($("input")[0]).val()도 10037
-		//$("input[name=tranNo]").val()로 찍으면 10037 고정
-		//$($("input[name=tranNo]")[$(".ct_list_pop td:nth-child(1)").index(this)]).val()는 인식 못함
-		// ㄴ 예상에는 this에 문제가 있는듯 함
-		
-		
+				
 	});
 	
 });

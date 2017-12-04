@@ -69,17 +69,18 @@
 							FROM product p, transaction t
 								<if test="searchCondition != null">
 									<where>
+										
 										<if test="searchCondition == 0 and searchKeyword !='' ">
-							 				prod_no == #{searchKeyword}
+							 				p.prod_no = #{searchKeyword}
 										</if>
 										<if test="searchCondition == 1 and searchKeyword !='' ">
-							 				prod_name LIKE #{searchKeyword}
+							 				p.prod_name LIKE ${searchKeyword}
 										</if>
 										<if test="searchCondition == 2 and searchKeyword !='' ">
-							 				price = #{searchKeyword}
+							 				p.price = #{searchKeyword}
 										</if>
 										<if test="1==1">
-											p.prod_no = t.prod_no(+)
+											AND p.prod_no = t.prod_no(+)
 										</if>
 									</where>
 								</if>
@@ -116,6 +117,9 @@
 								</if>
 								<if test="searchCondition == 2 and searchKeyword !='' ">
 						 			price = #{searchKeyword}
+								</if>
+								<if test="1==1">
+									p.prod_no =t.prod_no(+)
 								</if>
 							</where>
 						</if> ) countTable						

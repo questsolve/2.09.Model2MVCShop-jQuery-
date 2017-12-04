@@ -123,7 +123,13 @@ public class ProductController {
 		if(search.getCurrentPage() ==0 ){
 			search.setCurrentPage(1);
 		}
+		
+		if(search.getSearchKeyword()!=null && search.getSearchKeyword()!="") {
+			search.setSearchKeyword("'%"+search.getSearchKeyword()+"%'");
+		}
+		
 		search.setPageSize(pageSize);
+		
 		Map<String, Object> map = productService.getProductList(search);
 		
 		Page resultPage = new Page( search.getCurrentPage(), ((Integer)map.get("totalCount")).intValue(), pageUnit, pageSize);
